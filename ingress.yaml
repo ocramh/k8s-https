@@ -3,14 +3,18 @@ kind: Ingress
 metadata:
   name: my-ingress
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: k8s-test-static-ip
+    kubernetes.io/ingress.global-static-ip-name: k8s-test-ip
+    networking.gke.io/managed-certificates: my-certificate
 spec:
-  tls:
-    - secretName: my-first-secret
-  rules:
-    - host: k8s.shapes.ai
-      http:
-        paths:
-          - backend:
-              serviceName: my-service
-              servicePort: first-port
+  backend:
+    serviceName: my-service
+    servicePort: first-port
+  # tls:
+  #   - secretName: tls-secret
+  # rules:
+  #   - host: k8s.shapes.ai
+  #     http:
+  #       paths:
+  #         - backend:
+  #             serviceName: my-service
+  #             servicePort: first-port
