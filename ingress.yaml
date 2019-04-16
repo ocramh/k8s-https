@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: k8s-test-static-ip
+spec:
+  tls:
+    - secretName: my-first-secret
+  rules:
+    - host: k8s.shapes.ai
+      http:
+        paths:
+          - backend:
+              serviceName: my-service
+              servicePort: first-port
